@@ -109,7 +109,7 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///lipame'),
+    'default': env.db('DATABASE_URL', default='mysql:///lipame'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
