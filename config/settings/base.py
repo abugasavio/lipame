@@ -49,6 +49,7 @@ THIRD_PARTY_APPS = [
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'phonenumber_field',
 ]
 
 # Apps specific for this project go here.
@@ -56,6 +57,7 @@ LOCAL_APPS = [
     # custom users app
     'lipame.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'lipame.lipa.apps.LipaConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -251,6 +253,7 @@ AUTHENTICATION_BACKENDS = [
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'phone_number'
 
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
 ACCOUNT_ADAPTER = 'lipame.users.adapters.AccountAdapter'
@@ -267,7 +270,8 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 
 ########## CELERY
 INSTALLED_APPS += ['lipame.taskapp.celery.CeleryConfig']
-CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='django://')
+# CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='django://')
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 if CELERY_BROKER_URL == 'django://':
     CELERY_RESULT_BACKEND = 'redis://'
 else:
