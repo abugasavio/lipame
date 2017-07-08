@@ -17,6 +17,7 @@ urlpatterns = [
     # User management
     url(r'^users/', include('lipame.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^lipa/', include('lipame.lipa.urls')),
 
     # Your stuff: custom urls includes go here
 

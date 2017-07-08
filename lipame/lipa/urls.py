@@ -4,8 +4,8 @@ from . import views
 
 urlpatterns = [
     url(
-        regex=r'^',
-        view=views.LipaView.as_view(),
-        name='lipa'
-    ),
+        regex=r'^make_payment/$',
+        view=views.make_payment,
+        name='make-payment'
+    )
 ]
