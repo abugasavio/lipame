@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load render_table from django_tables2 %}
 {% load staticfiles i18n %}
+{% load bootstrap3 %}
 {% block booking %}
 <!-- BANNER : begin -->
 		<div id="banner">
@@ -43,7 +44,7 @@
 
 									<!-- SUBMIT : begin -->
 									<span class="submit-btn">
-										<button class="button" type="submit"><i class="fa fa-send"></i> Lipa</button>
+										<button class="button" type="submit"><i class="fa fa-send"></i> PAY <span id="classCost"> </span></button>
 									</span>
 									<!-- SUBMIT : end -->
 
@@ -60,14 +61,19 @@
 		<!-- BANNER : end -->
     <section>
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
+      <div class="col-sm-10 col-sm-offset-1">
+        <div id="results"></div>
         <h3>Transactions List</h3>
-        {% render_table bookings %}
+        {% render_table bookings 'django_tables2/bootstrap.html' %}
       </div>
     </div>
     </section>
 
 {% endblock booking %}
+{% block extra-css %}
+{% bootstrap_css %}
+<link href="{% static 'django_tables2/bootstrap.css' %}" rel="stylesheet" />
+{% endblock %}
 {% block extra-js %}
 <script>
 function makePayment() {
@@ -84,6 +90,7 @@ function makePayment() {
           $('#post-text').val(''); // remove the value from the input
           console.log(json); // log the returned json to the console
           console.log("success"); // another sanity check
+          $('#results').html("<div class='alert alert-success radius'><h3>Karibu SGR. Successful.</h3></div>");
       },
 
       // handle a non-successful response
@@ -100,6 +107,7 @@ $('#lipa-form').on('submit', function(event){
     console.log("form submitted!")
     makePayment();
 });
+
 </script>
 {% endblock %}
 
