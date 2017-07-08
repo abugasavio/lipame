@@ -29,6 +29,7 @@ class Wallet(models.Model):
                                    amount=amount,
                                    opening_balance=opening_balance,
                                    closing_balance=closing_balance)
+        return closing_balance
 
     def debit(self, amount):
         self.debit(0-amount)

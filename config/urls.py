@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^users/', include('lipame.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^lipa/', include('lipame.lipa.urls')),
+    url(r'^wallet/', include('wallet.urls')),
 
     # Your stuff: custom urls includes go here
 

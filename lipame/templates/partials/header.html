@@ -20,7 +20,7 @@
 							<div class="header-register">
 								<button class="register-toggle header-btn">
                   {% if request.user.is_authenticated %}
-                  Balance: {{ balance }} TZS
+                  Balance: <span id="wallet_balance">{{ balance }} TZS</span>
                   {% else %}
                   <a href="{% url 'account_signup' %}"><i class="fa fa-plus-circle"></i> Register</a>
                   {% endif %}
