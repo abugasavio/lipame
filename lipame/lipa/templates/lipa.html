@@ -100,6 +100,28 @@ $('#lipa-form').on('submit', function(event){
     console.log("form submitted!")
     makePayment();
 });
+
+$('#submit_topup').on('click', function(event){
+  var topup_amount = $('#topup_amount').val();
+  $.ajax({
+      type: "POST",
+      url: "/topup",
+      dataType: 'json',
+      data: {
+        topup_amount: topup_amount
+      },
+      success: function(data, textStatus, error) {
+        //hide form
+        $('#topup_form').hide();
+        $('#topup_success').show();
+        $('#topup_error').hide();
+      },
+      error: function(request, textStatus, error) {
+        $('#topup_error').show();
+      }
+    });
+});
+
 </script>
 {% endblock %}
 

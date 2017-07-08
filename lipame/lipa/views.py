@@ -2,6 +2,7 @@ import datetime
 from django.views.generic import TemplateView, View
 from django.http import JsonResponse
 from lipa.models import Booking
+from wallet.models import Wallet
 
 
 class LipaView(TemplateView):
@@ -10,6 +11,7 @@ class LipaView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(LipaView, self).get_context_data(**kwargs)
         context['bookings'] = Booking.objects.filter(user=self.request.user)
+        context['balance'] = Wallet.user_balance(self.request.user)
         return context
 
 

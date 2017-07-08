@@ -6,7 +6,7 @@
 
 					<!-- HEADER BRANDING : begin -->
 					<div class="header-branding">
-						<a href="#"><img src="dummies/logo.png" alt="LipaME"></a>
+						<h4>LipaME</h4>
 					</div>
 					<!-- HEADER BRANDING : end -->
 
@@ -18,7 +18,28 @@
 
 							<!-- HEADER REGISTER : begin -->
 							<div class="header-register">
-								<button class="header-btn"><a href="{% url 'account_signup' %}"><i class="fa fa-plus-circle"></i> Register</a></button>
+								<button class="register-toggle header-btn">
+                  {% if request.user.is_authenticated %}
+                  Balance: {{ balance }} TZS
+                  {% else %}
+                  <a href="{% url 'account_signup' %}"><i class="fa fa-plus-circle"></i> Register</a>
+                  {% endif %}
+                </button>
+                <div class="header-form" style="display: none;">
+                  <h4 style="color: white">Top Up</h4>
+                  <h5 id="topup_error" style="color: red; display: none"><i class="fa fa-warning"></i> There was an error topping up your account!</h5>
+                  <h5 id="topup_success" style="color: green; display: none"><i class="fa fa-check"></i> Your account has been topped up!</h5>
+									<div id="topup_form" class="default-form">
+										<p class="alert-message warning"><i class="ico fa fa-exclamation-circle"></i> All fields are required! <i class="fa fa-times close"></i></p>
+										<p class="form-row">
+											<input class="required" type="text" placeholder="Amount" id="topup_amount">
+										</p>
+										<p class="form-row">
+											<button class="submit-btn button" id="submit_topup"><i class="fa fa-plus-circle"></i> Top Up</button>
+										</p>
+
+									</div>
+								</div>
 							</div>
 							<!-- HEADER REGISTER : end -->
 
