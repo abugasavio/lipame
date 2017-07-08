@@ -1,3 +1,4 @@
+import datetime
 from django.views.generic import TemplateView
 from django.http import JsonResponse
 from lipa.models import Booking
@@ -11,6 +12,8 @@ def make_payment(request):
     if request.method == 'POST':
         date_of_travel = request.POST.get('date_of_travel')
         travel_class = request.POST.get('travel_class')
+        if date_of_travel:
+            date_of_travel = datetime.datetime.strptime(date_of_travel, '%d/%m/%Y')
 
         booking = Booking.objects.create(date_of_travel=date_of_travel, travel_class=travel_class,
                                          user=request.user)

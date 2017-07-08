@@ -25,7 +25,7 @@
 								<form class="default-form" action="/" id="lipa-form" method="post">{% csrf_token %}
 									<!-- ARRIVAL DATE : begin -->
 									<span class="calendar-input input-left" title="Arrival">
-										<input type="text" name="date-of-travel" id="date-of-travel" placeholder="Date of Travel" data-dateformat="m/d/y">
+										<input type="text" name="date-of-travel" id="date-of-travel" placeholder="Date of Travel" data-dateformat="dd/mm/yy">
 										<i class="fa fa-calendar"></i>
 									</span>
 									<!-- ARRIVAL DATE : end -->
@@ -34,7 +34,7 @@
 										<select name="class" data-placeholder="Class" id="class">
 											<option>Select Class</option>
 											<option value="economy">Economy</option>
-											<option value="firstClass">First Class</option>
+											<option value="first_class">First Class</option>
 										</select>
 									</span>
 									<!-- ADULTS : end -->
