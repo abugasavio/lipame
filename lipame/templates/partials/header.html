@@ -18,57 +18,20 @@
 
 							<!-- HEADER REGISTER : begin -->
 							<div class="header-register">
-								<button class="register-toggle header-btn"><i class="fa fa-plus-circle"></i> Register</button>
-								<div class="header-form">
-									<form action="index.html" class="default-form">
-										<p class="alert-message warning"><i class="ico fa fa-exclamation-circle"></i> All fields are required! <i class="fa fa-times close"></i></p>
-										<p class="form-row">
-											<input class="required" type="text" placeholder="Username">
-										</p>
-										<p class="form-row">
-											<input class="required email" type="text" placeholder="Email">
-										</p>
-										<p class="form-row">
-											<input class="required" type="password" placeholder="Password">
-										</p>
-										<p class="form-row">
-											<input class="required" type="password" placeholder="Repeat Password">
-										</p>
-										<p class="form-row">
-											<button class="submit-btn button"><i class="fa fa-plus-circle"></i> Register</button>
-										</p>
-									</form>
-								</div>
+								<button class="header-btn"><a href="{% url 'account_signup' %}"><i class="fa fa-plus-circle"></i> Register</a></button>
 							</div>
 							<!-- HEADER REGISTER : end -->
 
 							<!-- HEADER LOGIN : begin -->
-							<div class="header-login">
-								<button class="login-toggle header-btn"><i class="fa fa-power-off"></i> Login</button>
-								<div class="header-form">
-									<form action="index.html" class="default-form">
-										<p class="alert-message warning"><i class="ico fa fa-exclamation-circle"></i> All fields are required! <i class="fa fa-times close"></i></p>
-										<p class="form-row">
-											<input class="required email" type="text" placeholder="Email">
-										</p>
-										<p class="form-row">
-											<input class="required" type="password" placeholder="Password">
-										</p>
-										<p class="form-row">
-											<button class="submit-btn button"><i class="fa fa-power-off"></i> Login</button>
-										</p>
-										<p class="form-row forgot-password">
-											<a href="#">Forgot Password?</a>
-										</p>
-									</form>
-								</div>
-							</div>
-							<!-- HEADER LOGIN : end -->
 
+							<!-- HEADER LOGIN : end -->
+              {% if request.user.is_authenticated %}
 							<!-- HEADER ADD OFFER : begin -->
 							<span class="header-add-offer"><a href="#" class="button"><i class="fa fa-plus"></i> Logout</a></span>
 							<!-- HEADER ADD OFFER : end -->
-
+              {% else %}
+              <span><a class="button" href="{% url 'account_login' %}"><i class="fa fa-power-off"></i> Login</a></span>
+              {% endif %}
 						</div>
 						<!-- HEADER TOOLS : end -->
 
