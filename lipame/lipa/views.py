@@ -7,6 +7,10 @@ from lipa.models import Booking
 class LipaView(TemplateView):
     template_name = 'lipa.html'
 
+    def get_context_data(self, **kwargs):
+        context['bookings'] = Booking.objects.filter(user=self.request.user)
+        return context
+
 
 def make_payment(request):
     if request.method == 'POST':
