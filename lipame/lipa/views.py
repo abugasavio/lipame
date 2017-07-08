@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.http import JsonResponse
-from .models import Booking
+from lipa.models import Booking
 
 
 class LipaView(TemplateView):

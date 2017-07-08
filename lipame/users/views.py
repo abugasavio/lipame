@@ -31,11 +31,11 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     # send the user back to their own page after a successful update
     def get_success_url(self):
         return reverse('users:detail',
-                       kwargs={'username': self.request.user.username})
+                       kwargs={'username': self.request.user.phonenumber})
 
     def get_object(self):
         # Only get the User record for the user making the request
-        return User.objects.get(username=self.request.user.username)
+        return User.objects.get(phonenumber=self.request.user.phonenumber)
 
 
 class UserListView(LoginRequiredMixin, ListView):

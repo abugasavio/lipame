@@ -4,8 +4,8 @@ from . import views
 
 urlpatterns = [
     url(
-        regex=r'^make_payment/$',
+        regex=r'^make-payment/$',
         view=views.make_payment,
-        name='make-payment'
+        name='make_payment'
     )
 ]

@@ -12,7 +12,7 @@
 		<!-- GOOGLE FONTS : end -->
 
         <!-- STYLESHEETS : begin -->
-		<link rel="stylesheet" type="text/css" href="{% static 'library/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'library/css/font-awesome.min.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'library/css/owl.carousel.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'library/css/animate.custom.css' %}">
@@ -33,11 +33,23 @@
     {% block header %}
       {% include 'partials/header.html' %}
     {% endblock header %}
-    {% block content %}
+    {% block booking %}
 
-    {% endblock content %}
+    {% endblock booking %}
 		<!-- CORE : begin -->
 		<div id="core">
+
+            <section class="content-section">
+				<div class="container">
+					<div class="row">
+
+             {% block content %} {% endblock %}
+
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- CONTENT SECTION : end -->
 
 			<!-- CONTENT SECTION : begin -->
 			<section class="content-section deal">
@@ -334,6 +346,7 @@
 				</div>
 			</section>
 			<!-- BROWSE : end -->
+
 
 			<!-- CONTENT SECTION : begin -->
 			<section class="content-section">
