@@ -36,3 +36,13 @@
 [hidden][style="display: block;"] {
   display: block !important;
 }
+
+.banner-search .calendar-input {
+    max-width: 400px;
+    text-align: left;
+}
+
+.banner-search .select-box {
+    max-width: 200px;
+    text-align: left;
+}

@@ -12,3 +12,4 @@ class Booking(TimeStampedModel, StatusModel):
     travel_class = models.CharField(choices=TRAVEL_CLASSES, default=TRAVEL_CLASSES.economy, max_length=30)
     status = models.CharField(choices=STATUS, default=STATUS.pending, max_length=20)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=False)
+    payment_reference = models.CharField(max_length=100, blank=True)

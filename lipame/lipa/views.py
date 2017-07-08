@@ -1,5 +1,5 @@
 import datetime
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.http import JsonResponse
 from lipa.models import Booking
 

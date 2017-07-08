@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+{% load staticfiles i18n %}
 {% block booking %}
 <!-- BANNER : begin -->
 		<div id="banner">
 
 			<!-- BANNER BG : begin -->
 			<div class="banner-bg">
-				<div class="banner-bg-item"><img src="dummies/banner_bg_01.jpg" alt=""></div>
-				<div class="banner-bg-item"><img src="dummies/banner_bg_02.jpg" alt=""></div>
-				<div class="banner-bg-item"><img src="dummies/banner_bg_03.jpg" alt=""></div>
+				<div class="banner-bg-item"><img src="{% static 'images/banners/train01.jpg' %}" alt=""></div>
+				<div class="banner-bg-item"><img src="{% static 'images/banners/train01.jpg' %}" alt=""></div>
+				<div class="banner-bg-item"><img src="{% static 'images/banners/train01.jpg' %}" alt=""></div>
 			</div>
 			<!-- BANNER BG : end -->
 
@@ -56,6 +57,53 @@
 
 		</div>
 		<!-- BANNER : end -->
+    <section>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <table>
+            <thead>
+              <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+                <th>Column 3</th>
+                <th>Column 4</th>
+                <th>Column 5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Item #1</td>
+                <td>Item #1</td>
+                <td>Item #1</td>
+                <td>Item #1</td>
+                <td>Item #1</td>
+              </tr>
+              <tr>
+                <td>Item #2</td>
+                <td>Item #2</td>
+                <td>Item #2</td>
+                <td>Item #2</td>
+                <td>Item #2</td>
+              </tr>
+              <tr>
+                <td>Item #3</td>
+                <td>Item #3</td>
+                <td>Item #3</td>
+                <td>Item #3</td>
+                <td>Item #3</td>
+              </tr>
+              <tr>
+                <td>Item #4</td>
+                <td>Item #4</td>
+                <td>Item #4</td>
+                <td>Item #4</td>
+                <td>Item #4</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+    </section>
 
 {% endblock booking %}
 {% block extra-js %}
