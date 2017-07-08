@@ -1,112 +1,109 @@
-{% extends "base.html" %}
-{% load render_table from django_tables2 %}
-{% load staticfiles i18n %}
-{% load bootstrap3 %}
+{% extends "base.html" %} {% load render_table from django_tables2 %} {% load staticfiles i18n %} {% load bootstrap3 %}
 {% block booking %}
 <!-- BANNER : begin -->
-		<div id="banner">
+<div id="banner">
 
-			<!-- BANNER BG : begin -->
-			<div class="banner-bg">
-				<div class="banner-bg-item"><img src="{% static 'images/banners/train01.jpg' %}" alt=""></div>
-				<div class="banner-bg-item"><img src="{% static 'images/banners/train01.jpg' %}" alt=""></div>
-				<div class="banner-bg-item"><img src="{% static 'images/banners/train01.jpg' %}" alt=""></div>
-			</div>
-			<!-- BANNER BG : end -->
+  <!-- BANNER BG : begin -->
+  <div class="banner-bg">
+    <div class="banner-bg-item"><img src="{% static 'images/banners/train01.jpg' %}" alt=""></div>
+    <div class="banner-bg-item"><img src="{% static 'images/banners/train01.jpg' %}" alt=""></div>
+    <div class="banner-bg-item"><img src="{% static 'images/banners/train01.jpg' %}" alt=""></div>
+  </div>
+  <!-- BANNER BG : end -->
 
-			<!-- BANNER SEARCH : begin -->
-			<div class="banner-search">
-				<div class="container">
-					<div class="banner-search-inner">
-						<ul class="custom-list tab-title-list clearfix">
-							<li class="tab-title"><a href="#swap">Book A Train</a></li>
-						</ul>
-						<ul class="custom-list tab-content-list">
+  <!-- BANNER SEARCH : begin -->
+  <div class="banner-search">
+    <div class="container">
+      <div class="banner-search-inner">
+        <ul class="custom-list tab-title-list clearfix">
+          <li class="tab-title"><a href="#swap">Book A Train</a></li>
+        </ul>
+        <ul class="custom-list tab-content-list">
 
-							<!-- SWAP : begin -->
-							<li class="tab-content active">
-								<form class="default-form" action="/" id="lipa-form" method="post">{% csrf_token %}
-									<!-- ARRIVAL DATE : begin -->
-									<span class="calendar-input input-left" title="Arrival">
+          <!-- SWAP : begin -->
+          <li class="tab-content active">
+            <form class="default-form" action="/" id="lipa-form" method="post">{% csrf_token %}
+              <!-- ARRIVAL DATE : begin -->
+              <span class="calendar-input input-left" title="Arrival">
 										<input type="text" name="date-of-travel" id="date-of-travel" placeholder="Date of Travel" data-dateformat="dd/mm/yy">
 										<i class="fa fa-calendar"></i>
 									</span>
-									<!-- ARRIVAL DATE : end -->
-									<!-- ADULTS : begin -->
-									<span class="select-box" title="Class">
+              <!-- ARRIVAL DATE : end -->
+              <!-- ADULTS : begin -->
+              <span class="select-box" title="Class">
 										<select name="class" data-placeholder="Class" id="class">
 											<option>Select Class</option>
 											<option value="economy">Economy</option>
 											<option value="first_class">First Class</option>
 										</select>
 									</span>
-									<!-- ADULTS : end -->
+              <!-- ADULTS : end -->
 
-									<!-- SUBMIT : begin -->
-									<span class="submit-btn">
+              <!-- SUBMIT : begin -->
+              <span class="submit-btn">
 										<button class="button" type="submit"><i class="fa fa-send"></i> PAY <span id="classCost"> </span></button>
-									</span>
-									<!-- SUBMIT : end -->
+              </span>
+              <!-- SUBMIT : end -->
 
-								</form>
-							</li>
-							<!-- SWAP : end -->
-						</ul>
-					</div>
-				</div>
-			</div>
-			<!-- BANNER SEARCH : end -->
-
-		</div>
-		<!-- BANNER : end -->
-    <section>
-    <div class="row">
-      <div class="col-sm-10 col-sm-offset-1">
-        <div id="results"></div>
-        <h3>Transactions List</h3>
-        {% render_table bookings 'django_tables2/bootstrap.html' %}
+            </form>
+          </li>
+          <!-- SWAP : end -->
+        </ul>
       </div>
     </div>
-    </section>
+  </div>
+  <!-- BANNER SEARCH : end -->
 
-{% endblock booking %}
-{% block extra-css %}
-{% bootstrap_css %}
-<link href="{% static 'django_tables2/bootstrap.css' %}" rel="stylesheet" />
-{% endblock %}
-{% block extra-js %}
+</div>
+<!-- BANNER : end -->
+<section>
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div id="results"></div>
+      <h3>Transactions List</h3>
+      {% render_table bookings 'django_tables2/bootstrap.html' %}
+    </div>
+  </div>
+</section>
+
+{% endblock booking %} {% block extra-css %} {% bootstrap_css %}
+<link href="{% static 'django_tables2/bootstrap.css' %}" rel="stylesheet" /> {% endblock %} {% block extra-js %}
 <script>
-function makePayment() {
-  console.log($('#date-of-travel').val());
-  console.log($('#class').val())
-  console.log("create post is working!") // sanity check
-  $.ajax({
-      url : "lipa/make-payment/", // the endpoint
-      type : "POST", // http method
-      data : { date_of_travel : $('#date-of-travel').val(), travel_class: $('#class').val() }, // data sent with the post request
+  function makePayment() {
+    console.log($('#date-of-travel').val());
+    console.log($('#class').val())
+    console.log("create post is working!") // sanity check
+    $.ajax({
+      url: "lipa/make-payment/", // the endpoint
+      type: "POST", // http method
+      data: {
+        date_of_travel: $('#date-of-travel').val(),
+        travel_class: $('#class').val()
+      }, // data sent with the post request
 
       // handle a successful response
-      success : function(json) {
-          $('#post-text').val(''); // remove the value from the input
-          console.log(json); // log the returned json to the console
-          console.log("success"); // another sanity check
-          $('#results').html("<div class='alert alert-success radius'><h3>Karibu SGR. Successful.</h3></div>");
+      success: function (json) {
+        $('#post-text').val(''); // remove the value from the input
+        console.log(json); // log the returned json to the console
+        console.log("success"); // another sanity check
+        $('#results').html("<div class='alert alert-success radius'><h3>Karibu SGR. Successful.</h3></div>");
       },
 
       // handle a non-successful response
-      error : function(xhr, errmsg, err) {
-          $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+      error: function (xhr, errmsg, err) {
+        $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " +
+          errmsg +
           " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-          console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
       }
     });
-}
+  }
 
-$('#lipa-form').on('submit', function(event){
+  $('#lipa-form').on('submit', function (event) {
     event.preventDefault();
     console.log("form submitted!")
     makePayment();
-});
+  });
 
 </script>
 {% endblock %}
