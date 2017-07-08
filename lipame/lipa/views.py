@@ -8,6 +8,7 @@ class LipaView(TemplateView):
     template_name = 'lipa.html'
 
     def get_context_data(self, **kwargs):
+        context = super(LipaView, self).get_context_data(**kwargs)
         context['bookings'] = Booking.objects.filter(user=self.request.user)
         return context
 
