@@ -53,3 +53,4 @@ celery==3.1.25
 
 # Your custom requirements go here
 django-phonenumber-field==1.3.0
+django-datetime-widget==0.9.3

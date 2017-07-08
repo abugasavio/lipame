@@ -1,5 +1,60 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Testing Lipa Page</h2>
+<!-- BANNER : begin -->
+		<div id="banner">
+
+			<!-- BANNER BG : begin -->
+			<div class="banner-bg">
+				<div class="banner-bg-item"><img src="dummies/banner_bg_01.jpg" alt=""></div>
+				<div class="banner-bg-item"><img src="dummies/banner_bg_02.jpg" alt=""></div>
+				<div class="banner-bg-item"><img src="dummies/banner_bg_03.jpg" alt=""></div>
+			</div>
+			<!-- BANNER BG : end -->
+
+			<!-- BANNER SEARCH : begin -->
+			<div class="banner-search">
+				<div class="container">
+					<div class="banner-search-inner">
+						<ul class="custom-list tab-title-list clearfix">
+							<li class="tab-title"><a href="#swap">Book A Train</a></li>
+						</ul>
+						<ul class="custom-list tab-content-list">
+
+							<!-- SWAP : begin -->
+							<li class="tab-content active">
+								<form class="default-form" action="index.html">
+									<!-- ARRIVAL DATE : begin -->
+									<span class="calendar-input input-left" title="Arrival">
+										<input type="text" name="arrival" placeholder="Date of Travel" data-dateformat="m/d/y">
+										<i class="fa fa-calendar"></i>
+									</span>
+									<!-- ARRIVAL DATE : end -->
+									<!-- ADULTS : begin -->
+									<span class="select-box" title="Class">
+										<select name="class" data-placeholder="Class">
+											<option>Select Class</option>
+											<option value="1">Economy</option>
+											<option value="2">First Class</option>
+										</select>
+									</span>
+									<!-- ADULTS : end -->
+
+									<!-- SUBMIT : begin -->
+									<span class="submit-btn">
+										<button class="button"><i class="fa fa-search"></i> Lipa</button>
+									</span>
+									<!-- SUBMIT : end -->
+
+								</form>
+							</li>
+							<!-- SWAP : end -->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- BANNER SEARCH : end -->
+
+		</div>
+		<!-- BANNER : end -->
 
 {% endblock content %}

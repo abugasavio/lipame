@@ -1,0 +1,24 @@
+* { zoom: 1; }
+
+.default-form .radio-input label:before { display: none; }
+.default-form .radio-input input { display: inline; width: auto; }
+
+.default-form .checkbox-input { position: relative; }
+.default-form .checkbox-input label:before { display: none; position: relative; top: 3px; margin-right: 10px; content: ""; width: 16px; height: 16px; line-height: 1em; font-size: 12px; text-align: center; border-radius: 2px; border: 1px solid transparent; }
+.default-form .checkbox-input input  { display: inline; }
+.default-form .checkbox-input label { display: inline; }
+
+.radial-progress-bar .loader-bg { border: 0; }
+.radial-progress-bar .spiner-holder-one { display: none; }
+
+.properties-search-filter .rating-filter .checkbox-input label  { display: inline; }
+.properties-search-filter .rating-filter .stars { display: none; }
+.properties-search-filter .rating-filter .label { position: relative; text-align: left; }
+
+.property-list.layout-grid .property-thumb .overlay { display: none; }
+.property-list.layout-grid .property-thumb:hover .overlay { display: block; }
+
+.tabs-container .tab-title:hover,
+.tabs-container .tab-title.active:hover,
+.banner-search .tab-title:hover,
+.banner-search .tab-title.active:hover { margin-top: 0; padding-bottom: 0; }
