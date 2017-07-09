@@ -6,11 +6,6 @@ from lipa.models import Booking
 from wallet.models import Wallet, Transaction
 from .utils import do_merchant_payment
 from .utils import do_merchant_payment, send_sms
-from wkhtmltopdf.views import PDFTemplateView
-
-
-class PDFTicket(PDFTemplateView):
-    pass
 
 
 
@@ -35,22 +30,31 @@ def make_payment(request):
 
         booking = Booking.objects.create(date_of_travel=date_of_travel, travel_class=travel_class,
                                          user=request.user)
-
         if travel_class == Booking.TRAVEL_CLASSES.economy:
             amount = 100
         elif travel_class == Booking.TRAVEL_CLASSES.first_class:
             amount = 300
 
-        response = do_merchant_payment(request.user.phone_number.as_e164.replace('+', ''), amount).json()
-
-        if response['transactionStatus'] == '200':
-            booking.payment_reference = response['transactionReference']
+        # Check if user has enough in wallet
+        wallet_balance = Wallet.user_balance(request.user)
+        if wallet_balance >= amount:
+            # Pay via wallet
+            Wallet.debit_user(request.user, amount, travel_class + ' ticket')
+            booking.payment_reference = str(Transaction.objects.filter(wallet__owner=request.user).last().id)
             booking.status = Booking.STATUS.paid
-            # send_sms(request.user.phone_number.as_e164,
-            #        "Thanks you for using LipaME. Your ticket number is TKT#{}".format(booking.id),
-            #         None)
         else:
-            booking.status = Booking.STATUS.failed
+            # Pay directly from MM wallet
+            response = do_merchant_payment(request.user.phone_number.as_e164.replace('+', ''), amount).json()
+            if response['transactionStatus'] == '200':
+                booking.payment_reference = response['transactionReference']
+                booking.status = Booking.STATUS.paid
+                # send_sms(request.user.phone_number.as_e164,
+                #        "Thanks you for using LipaME. Your ticket number is TKT#{}".format(booking.id),
+                #         None)
+            else:
+                booking.status = Booking.STATUS.failed
+
+
         booking.save()
 
         response_data = {}
