@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, View
 from django.http import JsonResponse
 from lipa.models import Booking
 from wallet.models import Wallet
+from .utils import do_merchant_payment
 
 
 class LipaView(TemplateView):
@@ -10,8 +11,9 @@ class LipaView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(LipaView, self).get_context_data(**kwargs)
-        context['bookings'] = Booking.objects.filter(user=self.request.user)
-        context['balance'] = Wallet.user_balance(self.request.user)
+        if self.request.user.id:
+            context['bookings'] = Booking.objects.filter(user=self.request.user).order_by('-created')
+            context['balance'] = Wallet.user_balance(self.request.user)
         return context
 
 
@@ -24,6 +26,21 @@ def make_payment(request):
 
         booking = Booking.objects.create(date_of_travel=date_of_travel, travel_class=travel_class,
                                          user=request.user)
+
+        if travel_class == Booking.TRAVEL_CLASSES.economy:
+            amount = 100
+        elif travel_class == Booking.TRAVEL_CLASSES.first_class:
+            amount = 300
+
+        response = do_merchant_payment(request.user.phone_number.as_e164.replace('+', ''), amount).json()
+
+        print(response)
+        if response['transactionStatus'] == '200':
+            booking.payment_reference = response['transactionReference']
+            booking.status = Booking.STATUS.paid
+        else:
+            booking.status = Booking.STATUS.failed
+        booking.save()
 
         response_data = {}
         response_data['result'] = 'Create Payment successful!'
