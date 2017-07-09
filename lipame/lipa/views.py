@@ -1,7 +1,7 @@
 import datetime
 from django.views.generic import TemplateView, View
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 from lipa.models import Booking
 from wallet.models import Wallet, Transaction
 from .utils import do_merchant_payment
@@ -25,6 +25,18 @@ def make_payment(request):
     if request.method == 'POST':
         date_of_travel = request.POST.get('date_of_travel')
         travel_class = request.POST.get('travel_class')
+        trip = request.POST.get('trip')
+        # validation
+        if not date_of_travel:
+            return HttpResponseBadRequest('Date of Travel is required')
+
+        if not travel_class:
+            return HttpResponseBadRequest('The class is required')
+
+        if not trip:
+            print(trip)
+            return HttpResponseBadRequest('Trip is required')
+
         if date_of_travel:
             date_of_travel = datetime.datetime.strptime(date_of_travel, '%d/%m/%Y')
 
@@ -54,6 +66,16 @@ def make_payment(request):
             else:
                 booking.status = Booking.STATUS.failed
 
+        # send_sms(request.user.phone_number.as_e164,
+        #        "Thanks you for using LipaME. Your ticket number is TKT#{}".format(booking.id),
+        #         None)
+        send_mail(
+            "Thanks you for using LipaME. Your ticket number is TKT#{}".format(booking.id),
+            'Your Madaraka Express Tickets',
+            'from@lipame.com',
+            [request.user.email],
+            fail_silently=False,
+        )
 
         booking.save()
 
