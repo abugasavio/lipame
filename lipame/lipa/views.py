@@ -1,9 +1,16 @@
 import datetime
 from django.views.generic import TemplateView, View
+from django.conf import settings
 from django.http import JsonResponse
 from lipa.models import Booking
 from wallet.models import Wallet, Transaction
 from .utils import do_merchant_payment
+from .utils import do_merchant_payment, send_sms
+from wkhtmltopdf.views import PDFTemplateView
+
+
+class PDFTicket(PDFTemplateView):
+    pass
 
 
 
@@ -39,6 +46,9 @@ def make_payment(request):
         if response['transactionStatus'] == '200':
             booking.payment_reference = response['transactionReference']
             booking.status = Booking.STATUS.paid
+            # send_sms(request.user.phone_number.as_e164,
+            #        "Thanks you for using LipaME. Your ticket number is TKT#{}".format(booking.id),
+            #         None)
         else:
             booking.status = Booking.STATUS.failed
         booking.save()

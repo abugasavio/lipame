@@ -48,133 +48,158 @@
 
         </div>
       </div>
-  </div>
-  </section>
+  {% if not request.user.is_authenticated %}
   <!-- CONTENT SECTION : end -->
+  <!-- CONTENT SECTION - SERVICES : begin -->
+			<section class="content-section services">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-4">
 
-  <!-- CONTENT SECTION : begin -->
-  <section class="content-section deal">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3">
+							<!-- SERVICE 1 : begin -->
+							<div class="service-container">
+								<p class="service-icon"><i class="fa fa-money"></i></p>
+								<h3 class="service-title">Buy your Train Ticket</h3>
+								<p>Using LipaME you can your tickets using your phone</p>
+							</div>
+							<!-- SERVICE 1 : end -->
 
-          <p><img src="dummies/content_img_02.jpg" alt="" class="rounded-shadow"></p>
+						</div>
+						<div class="col-sm-4">
 
-        </div>
-        <div class="col-sm-9">
+							<!-- SERVICE 2 : begin -->
+							<div class="service-container">
+								<p class="service-icon"><i class="fa fa-list"></i></p>
+								<h3 class="service-title">View your Transactions</h3>
+								<p>You see all your past transactions</p>
+							</div>
+							<!-- SERVICE 2 : end -->
 
-          <h2>Deal of the week!</h2>
-          <p>Snowy madness in Switzerland! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit
-            a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra nulla
-            ac diam.</p>
-          <p class="cta-button">
-            <a href="#" class="button"><i class="fa fa-list-ul"></i> See Details</a>
-          </p>
+						</div>
+						<div class="col-sm-4">
 
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- CONTENT SECTION : end -->
+							<!-- SERVICE 3 : begin -->
+							<div class="service-container">
+								<p class="service-icon"><i class="fa fa-ticket"></i></p>
+								<h3 class="service-title">All in 3 steps</h3>
+								<p>Easy to do</p>
+							</div>
+							<!-- SERVICE 3 : end -->
+
+						</div>
+					</div>
+				</div>
+			</section>
+      <!-- BROWSE : begin -->
+			<section id="browse">
+				<div class="container">
+					<h2>Train Stops And Pricing</h2>
+					<div class="browse-inner">
+						<div class="tabs-container">
+							<ul class="custom-list tab-title-list">
+								<li class="tab-title active"><a href="#top-destinations">Train Stops</a></li>
+							</ul>
+							<ul class="custom-list tab-content-list browse-contents">
+								<li class="tab-content">
+
+								</li>
+								<li class="tab-content active">
+
+									<!-- BROWSE DESTINATIONS : begin -->
+									<div class="browse-destinations">
+
+										<div class="row">
+											<div class="col-sm-4">
+
+												<!-- TOP DESTINATION 1 : begin -->
+												<div class="top-destination">
+													<img class="destination-thumb" src="{% static 'images/stops/nairobi.jpg' %}" alt="">
+													<div class="top-destination-inner">
+														<h3>Nairobi</h3>
+													</div>
+												</div>
+												<!-- TOP DESTINATION 1 : end -->
+
+											</div>
+											<div class="col-sm-4">
+
+												<!-- TOP DESTINATION 2 : begin -->
+												<div class="top-destination">
+													<img class="destination-thumb" src="{% static 'images/stops/athiriver.jpg' %}" alt="">
+													<div class="top-destination-inner">
+														<h3>Athi River</h3>
+													</div>
+												</div>
+												<!-- TOP DESTINATION 2 : end -->
+
+											</div>
+											<div class="col-sm-4">
+
+												<!-- TOP DESTINATION 3 : begin -->
+												<div class="top-destination">
+													<img class="destination-thumb" src="{% static 'images/stops/emali.jpg' %}" alt="">
+													<div class="top-destination-inner">
+														<h3>Emali</h3>
+													</div>
+												</div>
+												<!-- TOP DESTINATION 3 : end -->
+
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-4">
+
+												<!-- TOP DESTINATION 4 : begin -->
+												<div class="top-destination">
+													<img class="destination-thumb" src="{% static 'images/stops/kibwezi.jpg' %}" alt="">
+													<div class="top-destination-inner">
+														<h3>Kibwezi</h3>
+													</div>
+												</div>
+												<!-- TOP DESTINATION 4 : end -->
+
+											</div>
+											<div class="col-sm-4">
+
+												<!-- TOP DESTINATION 5 : begin -->
+												<div class="top-destination">
+													<img class="destination-thumb" src="{% static 'images/stops/voi.jpg' %}" alt="">
+													<div class="top-destination-inner">
+														<h3>Voi</h3>
+													</div>
+												</div>
+												<!-- TOP DESTINATION 5 : end -->
+
+											</div>
+											<div class="col-sm-4">
+
+												<!-- TOP DESTINATION 6 : begin -->
+												<div class="top-destination">
+													<img class="destination-thumb" src="{% static 'images/stops/mombasa.jpg' %}" alt="">
+													<div class="top-destination-inner">
+														<h3>Mombasa</h3>
+													</div>
+												</div>
+												<!-- TOP DESTINATION 6 : end -->
+
+											</div>
+										</div>
+
+									</div>
+									<!-- BROWSE DESTINATIONS : end -->
+
+								</li>
+								<li class="tab-content">
 
 
-  <!-- CONTENT SECTION : begin -->
-  <section class="content-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-
-          <h2>About casa</h2>
-          <p>Casa was made to make your travelling around the world more exciting and less expensive!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia
-            in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.</p>
-          <p class="cta-button">
-            <a href="#" class="button"><i class="fa fa-heart"></i> Get Started!</a>
-          </p>
-
-        </div>
-        <div class="col-sm-6">
-
-          <p><img src="dummies/content_img_01.jpg" alt=""></p>
-
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- CONTENT SECTION : end -->
-
-  </div>
-  <!-- CORE : end -->
-  <!-- NAVIGATION : begin -->
-
-  <!-- TESTIMONIALS : end -->
-
-  <!-- BOTTOM PANEL : begin -->
-  <aside id="bottom-panel">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3">
-
-          <!-- ABOUT WIDGET : begin -->
-          <div class="widget about-widget">
-            <div class="widget-content">
-              <p><img src="dummies/logo_footer.png" alt="Casa"></p>
-              <p>Casa is a modern way of planning and spending your vacation. Enjoy your holiday the best you can!</p>
-            </div>
-          </div>
-          <!-- ABOUT WIDGET : end -->
-
-        </div>
-        <div class="col-sm-3">
-
-          <!-- LINKS WIDGET : begin -->
-          <div class="widget links-widget">
-            <h3 class="widget-title"><span>Quick Links</span></h3>
-            <div class="widget-content">
-              <div class="row">
-                <div class="col-md-6">
-                  <ul class="custom-list">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Browse</a></li>
-                    <li><a href="#">About Us</a></li>
-                  </ul>
-                </div>
-                <div class="col-md-6">
-                  <ul class="custom-list">
-                    <li><a href="#">Register</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Add Offer</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- LINKS WIDGET : end -->
-
-        </div>
-
-        <!-- NEWSLETTER WIDGET : begin -->
-        <div class="widget newsletter-widget">
-          <h3 class="widget-title"><span>Newsletter</span></h3>
-          <div class="widget-content">
-            <p>Sign up for our newsletter!</p>
-            <form class="default-form" action="index.html">
-              <p class="alert-message warning"><i class="ico fa fa-exclamation-circle"></i> Valid email is required!</p>
-              <div class="input-group">
-                <input class="required email" type="text" placeholder="Email address ...">
-                <button><i class="fa fa-plus-circle"></i></button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <!-- NEWSLETTER WIDGET : end -->
-
-      </div>
-    </div>
-    </div>
-  </aside>
-  <!-- BOTTOM PANEL : end -->
-
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- BROWSE : end -->
+{% endif %}
   <!-- FOOTER : begin -->
   <footer id="footer">
     <div class="container">

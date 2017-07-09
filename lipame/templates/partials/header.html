@@ -6,7 +6,11 @@
 
 					<!-- HEADER BRANDING : begin -->
 					<div class="header-branding">
+<<<<<<< HEAD
 						<h4>LipaME</h4>
+=======
+            LipaME
+>>>>>>> 99455a1d90af623fb4d0707c85131b15dda3e8bf
 					</div>
 					<!-- HEADER BRANDING : end -->
 
@@ -17,6 +21,7 @@
 						<div class="header-tools">
 
 							<!-- HEADER REGISTER : begin -->
+
 							<div class="header-register">
 								<button class="register-toggle header-btn">
                   {% if request.user.is_authenticated %}
@@ -40,6 +45,7 @@
 
 									</div>
 								</div>
+
 							</div>
 							<!-- HEADER REGISTER : end -->
 
@@ -48,7 +54,7 @@
 							<!-- HEADER LOGIN : end -->
               {% if request.user.is_authenticated %}
 							<!-- HEADER ADD OFFER : begin -->
-							<span class="header-add-offer"><a href="#" class="button"><i class="fa fa-plus"></i> Logout</a></span>
+							<span class="header-add-offer"><a href="{% url 'account_logout' %}" class="button"><i class="fa fa-plus"></i> Logout</a></span>
 							<!-- HEADER ADD OFFER : end -->
               {% else %}
               <span><a class="button" href="{% url 'account_login' %}"><i class="fa fa-power-off"></i> Login</a></span>
@@ -58,10 +64,6 @@
 
 					</div>
 					<!-- HEADER NAVBAR : end -->
-
-					<!-- SEARCH TOGGLE : begin -->
-					<button class="search-toggle button"><i class="fa fa-search"></i></button>
-					<!-- SEARCH TOGGLE : end -->
 
 					<!-- NAVBAR TOGGLE : begin -->
 					<button class="navbar-toggle button"><i class="fa fa-bars"></i></button>
