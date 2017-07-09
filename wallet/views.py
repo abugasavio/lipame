@@ -1,5 +1,4 @@
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from lipame.lipa.utils import do_merchant_payment
 from wallet.models import Wallet
@@ -16,6 +15,6 @@ def topup(request):
         status = 'Success'
     else:
         balance = Wallet.user_balance(request.user)
-        status ='Failed'
+        status = 'Failed'
 
     return JsonResponse({"status": status, "balance": str(balance)+' TZS', "message": response['descriptionText']})

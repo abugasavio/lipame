@@ -55,16 +55,34 @@
   <!-- BANNER SEARCH : end -->
 
 </div>
-<!-- BANNER : end -->
-<section>
-  <div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
-      <div id="results"></div>
-      <h3>Transactions List</h3>
-      {% render_table bookings 'django_tables2/bootstrap.html' %}
+
+<section id="browse">
+  <div class="container">
+    <h2>Transactions</h2>
+    <div class="browse-inner">
+      <div class="tabs-container browse-tabs-container">
+        <ul class="custom-list tab-title-list">
+          <li class="tab-title active"><a href="#featured-bookings">Bookings</a></li>
+          <li class="tab-title"><a href="#wallet-transactions">Wallet Transactions</a></li>
+        </ul>
+        <ul class="custom-list tab-content-list browse-contents">
+          <li class="tab-content active">
+            <div class="browse-bookings">
+              {% render_table bookings 'django_tables2/bootstrap.html' %}
+            </div>
+          </li>
+          <li class="tab-content">
+            <div class="browse-transactions">
+              {% render_table wallet_transactions 'django_tables2/bootstrap.html' %}
+            </div>
+          </li>
+        </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+
 
 {% endblock booking %} {% block extra-css %} {% bootstrap_css %}
 <link href="{% static 'django_tables2/bootstrap.css' %}" rel="stylesheet" /> {% endblock %} {% block extra-js %}

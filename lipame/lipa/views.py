@@ -2,8 +2,9 @@ import datetime
 from django.views.generic import TemplateView, View
 from django.http import JsonResponse
 from lipa.models import Booking
-from wallet.models import Wallet
+from wallet.models import Wallet, Transaction
 from .utils import do_merchant_payment
+
 
 
 class LipaView(TemplateView):
@@ -13,6 +14,7 @@ class LipaView(TemplateView):
         context = super(LipaView, self).get_context_data(**kwargs)
         if self.request.user.id:
             context['bookings'] = Booking.objects.filter(user=self.request.user).order_by('-created')
+            context['wallet_transactions'] = Transaction.objects.filter(wallet__owner=self.request.user).order_by('-created')
             context['balance'] = Wallet.user_balance(self.request.user)
         return context
 
