@@ -4,6 +4,11 @@ from django.conf import settings
 from django.http import JsonResponse
 from lipa.models import Booking
 from .utils import do_merchant_payment, send_sms
+from wkhtmltopdf.views import PDFTemplateView
+
+
+class PDFTicket(PDFTemplateView):
+    pass
 
 
 class LipaView(TemplateView):
@@ -37,7 +42,9 @@ def make_payment(request):
         if response['transactionStatus'] == '200':
             booking.payment_reference = response['transactionReference']
             booking.status = Booking.STATUS.paid
-            send_sms(settings.request.user.phone_number.as_e164, message='Thanks you for using LipaME. Your ticket number is TKT#{}'.format(booking.id))
+            # send_sms(request.user.phone_number.as_e164,
+            #        "Thanks you for using LipaME. Your ticket number is TKT#{}".format(booking.id),
+            #         None)
         else:
             booking.status = Booking.STATUS.failed
         booking.save()

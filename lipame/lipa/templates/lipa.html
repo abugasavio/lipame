@@ -23,6 +23,14 @@
           <!-- SWAP : begin -->
           <li class="tab-content active">
             <form class="default-form" action="/" id="lipa-form" method="post">{% csrf_token %}
+
+            <span class="select-box" title="Class">
+              <select name="class" data-placeholder="From To" id="class">
+                <option>FROM TO</option>
+                <option value="nbo_mbs">NBO MBS</option>
+                <option value="mbs_nbo">MBS NBO</option>
+              </select>
+            </span>
               <!-- ARRIVAL DATE : begin -->
               <span class="calendar-input input-left" title="Arrival">
 										<input type="text" name="date-of-travel" id="date-of-travel" placeholder="Date of Travel" data-dateformat="dd/mm/yy">

@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = [
     'phonenumber_field',
     'django_tables2',
     'bootstrap3',
+    'wkhtmltopdf'
 ]
 
 # Apps specific for this project go here.
