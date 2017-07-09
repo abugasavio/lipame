@@ -3,12 +3,15 @@ from django.views.generic import TemplateView, View
 from django.conf import settings
 from django.http import JsonResponse, HttpResponseBadRequest
 from lipa.models import Booking
+from wallet.models import Wallet, Transaction
+from .utils import do_merchant_payment
 from .utils import do_merchant_payment, send_sms
 from wkhtmltopdf.views import PDFTemplateView
 
 
 class PDFTicket(PDFTemplateView):
     pass
+
 
 
 class LipaView(TemplateView):
@@ -18,6 +21,8 @@ class LipaView(TemplateView):
         context = super(LipaView, self).get_context_data(**kwargs)
         if self.request.user.id:
             context['bookings'] = Booking.objects.filter(user=self.request.user).order_by('-created')
+            context['wallet_transactions'] = Transaction.objects.filter(wallet__owner=self.request.user).order_by('-created')
+            context['balance'] = Wallet.user_balance(self.request.user)
         return context
 
 
@@ -50,7 +55,6 @@ def make_payment(request):
 
         response = do_merchant_payment(request.user.phone_number.as_e164.replace('+', ''), amount).json()
 
-        print(response)
         if response['transactionStatus'] == '200':
             booking.payment_reference = response['transactionReference']
             booking.status = Booking.STATUS.paid

@@ -61,6 +61,7 @@ LOCAL_APPS = [
     'lipame.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'lipame.lipa.apps.LipaConfig',
+    'wallet'
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -287,8 +288,11 @@ ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+
+# COMVIVA
 MERCHANT_ID = '780900003'
 CURRENCY_CODE = 'TZS'
+
 BASE_API_URL = 'http://172.27.34.27:1190/v0.14'
 BALANCE_URL = BASE_API_URL + '/MM/accounts/msisdn'
 TRANSACTIONS_URL = BASE_API_URL + '/MM/transactions'
