@@ -34,7 +34,6 @@ def make_payment(request):
 
         response = do_merchant_payment(request.user.phone_number.as_e164.replace('+', ''), amount).json()
 
-        print(response)
         if response['transactionStatus'] == '200':
             booking.payment_reference = response['transactionReference']
             booking.status = Booking.STATUS.paid

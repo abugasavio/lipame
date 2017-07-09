@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 
 class Transaction(models.Model):
     amount = models.IntegerField(default=0)
     wallet = models.ForeignKey('wallet.Wallet')
-    opening_balance = models.IntegerField()
-    closing_balance = models.IntegerField()
+    opening_balance = models.IntegerField(default=0)
+    closing_balance = models.IntegerField(default=0)
+    description = models.TextField(null=True, blank=True)
+    created = models.DateField(default=timezone.now())
 
 
 class Wallet(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
-    def credit(self, amount):
+    def credit(self, amount, reference=None):
+        amount = int(amount)
         last_transaction = self.get_last_transaction()
 
         if last_transaction:
@@ -25,21 +27,23 @@ class Wallet(models.Model):
         else:
             opening_balance = 0
             closing_balance = amount
+
         Transaction.objects.create(wallet=self,
                                    amount=amount,
                                    opening_balance=opening_balance,
-                                   closing_balance=closing_balance)
+                                   closing_balance=closing_balance,
+                                   description=reference)
         return closing_balance
 
-    def debit(self, amount):
-        self.debit(0-amount)
+    def debit(self, amount, reference=None):
+        return self.credit(0-amount, reference)
 
     def get_balance(self):
         return self.get_last_transaction().closing_balance if self.get_last_transaction() else 0
 
     def get_last_transaction(self):
         last_transaction = None
-        transactions = Transaction.objects.filter(wallet=self).order_by('-created')
+        transactions = Transaction.objects.filter(wallet=self)
         if transactions.count() > 0:
             last_transaction = transactions.last()
         return last_transaction
@@ -48,14 +52,14 @@ class Wallet(models.Model):
     def user_balance(cls, user):
         user_wallet = Wallet.objects.filter(owner=user)
         if user_wallet.count() > 0:
-            return user.get_balance()
+            return user_wallet[0].get_balance()
         return 0
 
     @classmethod
-    def credit_user(cls, user, amount):
-        user_wallet = Wallet.objects.get_or_create(owner=user)
-        user_wallet.credit(amount)
+    def credit_user(cls, user, amount, reference=None):
+        user_wallet, _ = Wallet.objects.get_or_create(owner=user)
+        return user_wallet.credit(amount, reference)
 
     @classmethod
-    def debit_user(cls, user, amount):
-        Wallet.credit_user(user, 0-amount)
+    def debit_user(cls, user, amount, reference=None):
+        return Wallet.credit_user(user, 0-amount, reference)
