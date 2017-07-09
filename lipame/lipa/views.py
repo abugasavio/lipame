@@ -7,6 +7,7 @@ from wallet.models import Wallet, Transaction
 from .utils import do_merchant_payment
 from .utils import do_merchant_payment, send_sms
 from wkhtmltopdf.views import PDFTemplateView
+from django.core.mail import send_mail
 
 
 class PDFTicket(PDFTemplateView):
@@ -61,6 +62,14 @@ def make_payment(request):
             # send_sms(request.user.phone_number.as_e164,
             #        "Thanks you for using LipaME. Your ticket number is TKT#{}".format(booking.id),
             #         None)
+            send_mail(
+                "Thanks you for using LipaME. Your ticket number is TKT#{}".format(booking.id),
+                'Your Madaraka Express Tickets',
+                'from@lipame.com',
+                [request.user.email],
+                fail_silently=False,
+            )
+
         else:
             booking.status = Booking.STATUS.failed
         booking.save()
