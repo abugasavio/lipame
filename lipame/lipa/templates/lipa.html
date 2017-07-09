@@ -25,8 +25,8 @@
             <form class="default-form" action="/" id="lipa-form" method="post">{% csrf_token %}
 
             <span class="select-box" title="Class">
-              <select name="class" data-placeholder="From To" id="class">
-                <option>FROM TO</option>
+              <select name="trip" data-placeholder="From To" id="trip">
+                <option value="">FROM TO</option>
                 <option value="nbo_mbs">NBO MBS</option>
                 <option value="mbs_nbo">MBS NBO</option>
               </select>
@@ -39,8 +39,7 @@
               <!-- ARRIVAL DATE : end -->
               <!-- ADULTS : begin -->
               <span class="select-box" title="Class">
-										<select name="class" data-placeholder="Class" id="class">
-											<option>Select Class</option>
+										<select name="class" id="class">
 											<option value="economy">Economy</option>
 											<option value="first_class">First Class</option>
 										</select>
@@ -86,7 +85,8 @@
       type: "POST", // http method
       data: {
         date_of_travel: $('#date-of-travel').val(),
-        travel_class: $('#class').val()
+        travel_class: $('#class').val(),
+        trip: $('#trip').val()
       }, // data sent with the post request
 
       // handle a successful response
@@ -99,8 +99,8 @@
 
       // handle a non-successful response
       error: function (xhr, errmsg, err) {
-        $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " +
-          errmsg +
+        $('#results').html("<div class='alert alert-danger radius'><span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span> Oops! We have encountered an error: " +
+          xhr.responseText +
           " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
         console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
       }
