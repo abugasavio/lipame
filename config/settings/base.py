@@ -291,3 +291,4 @@ CURRENCY_CODE = 'TZS'
 BASE_API_URL = 'http://172.27.34.27:1190/v0.14'
 BALANCE_URL = BASE_API_URL + '/MM/accounts/msisdn'
 TRANSACTIONS_URL = BASE_API_URL + '/MM/transactions'
+

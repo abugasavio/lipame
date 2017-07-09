@@ -5,6 +5,32 @@ import json
 from django.conf import settings
 import requests
 import uuid
+import boto3
+
+
+def send_sms(phone_number, message, sender_id):
+    """ A task to send messages to users using Amazon SNS asynchronously.
+    """
+    sns = boto3.client(
+        'sns',
+        region_name=settings.AWS_REGION_NAME,
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    )
+    sns.publish(
+        PhoneNumber=str(phone_number),
+        Message=message,
+        MessageAttributes={
+            'AWS.SNS.SMS.SenderID': {
+                'DataType': 'String',
+                'StringValue': (sender_id if sender_id else settings.AMAZON_SNS_SENDER_ID)
+            },
+            'AWS.SNS.SMS.SMSType': {
+                'DataType': 'String',
+                'StringValue': 'Transactional'
+            }
+        }
+    )
 
 
 def make_request(url, data, request_date, msisdn, pin):
